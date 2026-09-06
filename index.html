@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcher Kaffeetyp bist du? | Der wylde Lifestyle-Check</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              950: '#07020d',
+              900: '#120726',
+              800: '#220b45',
+              700: '#3b126e',
+              500: '#8b2fc9',
+              400: '#b054f7',
+              300: '#d88bff',
+              accent: '#f43f5e',
+              neon: '#38bdf8',
+            }
+          },
+          fontFamily: {
+            sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.08); }
+    }
+    .bg-blob-1 {
+      animation: pulse-slow 8s ease-in-out infinite;
+    }
+    .bg-blob-2 {
+      animation: pulse-slow 10s ease-in-out infinite 2s;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #120726;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3b126e;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-brand-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Ambient Glowing Background Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-32 -left-28 w-96 h-96 bg-brand-700/40 rounded-full blur-3xl bg-blob-1"></div>
+    <div class="absolute top-1/2 -right-32 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl bg-blob-2"></div>
+    <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-fuchsia-600/20 rounded-full blur-3xl bg-blob-1"></div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="relative z-10 flex-1 flex flex-col items-center justify-between p-4 sm:p-6 md:p-8 max-w-2xl mx-auto w-full">
+
+    <!-- Header Navigation -->
+    <header class="w-full text-center py-4">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-900/80 border border-brand-700/60 shadow-lg shadow-brand-950/50 backdrop-blur-md mb-3">
+        <span class="text-xl">☕✨</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-brand-300">Espresso Yourself • 2026 Edition</span>
+        <span class="text-xl">🔮</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-brand-300 via-fuchsia-300 to-brand-neon bg-clip-text text-transparent">
+        Welcher Kaffeetyp bist du?
+      </h1>
+      <p class="text-slate-400 text-sm mt-1">13 absolut unhinged Fragen für dein echtes Bohnen-Seelenprofil 💀☕</p>
+    </header>
+
+    <!-- Content Sections -->
+    <main class="w-full flex-1 flex items-center justify-center my-4">
+
+      <!-- SCREEN 1: INTRO -->
+      <section id="screen-intro" class="w-full bg-brand-900/60 border border-brand-700/40 backdrop-blur-xl rounded-3xl p-6 sm:p-10 shadow-2xl text-center space-y-6">
+        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-brand-700 to-fuchsia-500 p-1 flex items-center justify-center shadow-lg shadow-brand-500/20">
+          <div class="w-full h-full bg-brand-950 rounded-full flex items-center justify-center text-4xl">
+            ☕✨
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Finde deine wahre Kaffee-Identität</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg mx-auto">
+            Kein fader Instant-Test: Beantworte 13 ungeschminkte Lifestyle-Fragen und erfahre, welches Heiß- oder Kaltgetränk deinen Charakter, dein Stresslevel und deine Aura wirklich widerspiegelt.
+          </p>
+        </div>
+
+        <div class="pt-2">
+          <button id="btn-start" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-500 to-fuchsia-600 hover:from-brand-400 hover:to-fuchsia-500 text-white font-bold text-lg shadow-xl shadow-brand-500/25 transition-all transform active:scale-98 flex items-center justify-center gap-2">
+            <span>Bohnastischen Test starten</span>
+            <span class="text-xl">🚀</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- SCREEN 2: QUIZ CARDS -->
+      <section id="screen-quiz" class="w-full hidden space-y-4">
+        <!-- Progress Bar -->
+        <div class="w-full space-y-2">
+          <div class="flex justify-between items-center text-xs font-semibold text-brand-300 px-1">
+            <span id="quiz-progress-text">Röstvorgang: 1 von 13</span>
+            <span id="quiz-progress-percent" class="text-slate-400">8%</span>
+          </div>
+          <div class="w-full h-2.5 bg-brand-900 rounded-full overflow-hidden p-0.5 border border-brand-700/40">
+            <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-brand-400 to-fuchsia-400 rounded-full transition-all duration-300 w-[7.7%]"></div>
+          </div>
+        </div>
+
+        <!-- Question Box -->
+        <div class="bg-brand-900/70 border border-brand-700/50 backdrop-blur-xl rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+          <div class="space-y-2">
+            <div id="question-tag" class="text-xs uppercase font-extrabold tracking-wider text-fuchsia-400">Vibe Check #1</div>
+            <h3 id="question-title" class="text-xl sm:text-2xl font-bold text-white leading-snug">
+              Fragetext lädt...
+            </h3>
+          </div>
+
+          <!-- Options Container -->
+          <div id="options-container" class="space-y-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 3: RESULT -->
+      <section id="screen-result" class="w-full hidden space-y-6">
+        <div class="bg-brand-900/80 border border-brand-700/60 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-2xl text-center space-y-6">
+
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-800/80 border border-brand-500/40 text-brand-300 text-xs font-bold uppercase tracking-wider">
+            <span>🎉 Frisch aufgebrüht & serviert</span>
+          </div>
+
+          <!-- Result Header -->
+          <div class="space-y-2">
+            <div id="result-emoji" class="text-6xl animate-bounce">☕</div>
+            <h2 id="result-title" class="text-2xl sm:text-3xl font-black text-white">Dein Kaffee-Match</h2>
+            <p id="result-tagline" class="text-fuchsia-300 font-medium text-sm sm:text-base italic">"Spruch zum Vibe"</p>
+          </div>
+
+          <!-- Description -->
+          <p id="result-description" class="text-slate-300 text-sm leading-relaxed bg-brand-950/60 p-4 rounded-2xl border border-brand-800 text-left">
+            Beschreibung lädt...
+          </p>
+
+          <!-- Radar Chart Container -->
+          <div class="space-y-2 bg-brand-950/70 p-4 sm:p-5 rounded-2xl border border-brand-700/40">
+            <div class="flex items-center justify-between px-1">
+              <span class="text-xs font-bold text-brand-300 uppercase tracking-wide">Dein Bohnen-Netzdiagramm</span>
+              <span class="text-[11px] text-slate-400">Crema de la Crema Analyse</span>
+            </div>
+            <div class="relative w-full aspect-square max-w-[340px] mx-auto flex items-center justify-center overflow-hidden">
+              <canvas id="radarCanvas" class="w-full h-full block"></canvas>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="space-y-3 pt-2">
+            <!-- Share Button (Renders image & opens native share) -->
+            <button id="btn-share" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-brand-500 to-fuchsia-600 hover:from-brand-400 hover:to-fuchsia-500 text-white font-bold text-base shadow-lg shadow-brand-500/30 transition-all active:scale-98 flex items-center justify-center gap-2">
+              <span class="text-lg">📤</span>
+              <span id="btn-share-text">Teilen</span>
+            </button>
+
+            <!-- Download Chart Image -->
+            <button id="btn-download-chart" class="w-full py-3 px-5 rounded-2xl bg-brand-800/80 hover:bg-brand-700/80 text-brand-200 border border-brand-600/40 font-semibold text-sm transition-all active:scale-98 flex items-center justify-center gap-2">
+              <span>📊</span>
+              <span>Diagramm als Bild abspeichern</span>
+            </button>
+
+            <!-- Restart -->
+            <button id="btn-restart" class="w-full py-2.5 px-4 text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors">
+              🔄 Nochmal aufbrühen (für neue Aura)
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-3 text-xs text-slate-500 border-t border-brand-900/60 mt-4">
+      Mit 100% Arabica-Liebe geröstet von Bene ❤️ • <span class="text-brand-400 font-medium">coffeetest.benedrive.de</span>
+    </footer>
+
+  </div>
+
+  <!-- Toast Notification Modal -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-brand-800 text-white border border-fuchsia-500/50 shadow-2xl shadow-brand-950 px-5 py-3 rounded-2xl text-xs sm:text-sm font-semibold flex items-center gap-2 transform transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
+    <span id="toast-icon">✨</span>
+    <span id="toast-text">Meldung hier</span>
+  </div>
+
+  <!-- Logic & Quiz Data -->
+  <script>
+    const questions = [
+      {
+        id: 1,
+        tag: "Morgen-Extraktion ⏰ (Espresso Yourself)",
+        title: "Dein Wecker scheppert um 06:30 Uhr. Deine erste Amtshandlung?",
+        options: [
+          {
+            text: "Instant aufstehen, 5-Minuten Eisdusche, Grindset-Podcast an. Keine Schwäche zeigen.",
+            scores: { hustle: 3, idgaf: 0, cozy: 0, aura: 2, brainrot: 0 }
+          },
+          {
+            text: "Wecker ins Jenseits yeeten, 'Ist mir doch latte' murmeln und bis 11 Uhr weiterschlafen.",
+            scores: { hustle: 0, idgaf: 3, cozy: 1, aura: 0, brainrot: 1 }
+          },
+          {
+            text: "Erstmal 45 Minuten im Bett liegen, doomscrollen und in die Kuscheldecke muffeln.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 1, brainrot: 2 }
+          }
+        ]
+      },
+      {
+        id: 2,
+        tag: "Öffentlicher Raum 🚶 (Filterlos ehrlich)",
+        title: "Jemand rempelt dich in der Fußgängerzone an und sagt kein Wort. Dein Move?",
+        options: [
+          {
+            text: "Eiskalter Todesblick. Aura minus 5000 für ihn. Ich laufe cool weiter als wär nix.",
+            scores: { hustle: 1, idgaf: 3, cozy: 0, aura: 2, brainrot: 0 }
+          },
+          {
+            text: "Puls direkt auf 190. Da kocht mir instant das Kaffeewasser über – innerlich eskaliert!",
+            scores: { hustle: 3, idgaf: 0, cozy: 0, aura: 1, brainrot: 2 }
+          },
+          {
+            text: "Ich entschuldige mich reflexartig selbst 3 Mal: Tut mir leid, dass ich im Weg stand!",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 0, brainrot: 1 }
+          }
+        ]
+      },
+      {
+        id: 3,
+        tag: "Room Aesthetic 🛋️ (Crema de la Crema)",
+        title: "Hand aufs Herz: Wie sieht deine Bude bzw. dein Schreibtisch gerade aus?",
+        options: [
+          {
+            text: "Ultra clean, Monitor, Tastatur, leere Becher. Purer Zweckbau zum Mahlen und Grinden.",
+            scores: { hustle: 3, idgaf: 1, cozy: 0, aura: 1, brainrot: 0 }
+          },
+          {
+            text: "Pures Bohnen-Chaos. Der berühmte 'Stuhl des Grauens' mit 14 Hoodies führt schon ein Eigenleben.",
+            scores: { hustle: 0, idgaf: 3, cozy: 1, aura: 0, brainrot: 2 }
+          },
+          {
+            text: "Pinterest-Traum mit Duftkerzen, Fairy-Lights, Plüschdecke und cute Pflanzen.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 2, brainrot: 1 }
+          }
+        ]
+      },
+      {
+        id: 4,
+        tag: "Deadline Terror ⏳ (Auf Messers Mahlwerk)",
+        title: "Deadline ist 23:59 Uhr. Die Uhr schlägt 22:45 Uhr. Dein Zustand?",
+        options: [
+          {
+            text: "Hyperfokus ballert! 130 WPM Tipptempo, 3 Tabs offen, punkt 23:58 no-scope eingereicht.",
+            scores: { hustle: 3, idgaf: 0, cozy: 0, aura: 3, brainrot: 0 }
+          },
+          {
+            text: "KI kurz mit Stichworten gefüttert, Copy-Paste, abgeschickt. 4 gewinnt, Hauptsache durch.",
+            scores: { hustle: 0, idgaf: 3, cozy: 0, aura: 1, brainrot: 2 }
+          },
+          {
+            text: "Komplette Schockstarre. Ich zünde Salbei an, trinke heißen Kakao und hoffe auf ein Wunder.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 0, brainrot: 2 }
+          }
+        ]
+      },
+      {
+        id: 5,
+        tag: "Freitagabend Vibes 🌃 (Koffein statt Schlaf)",
+        title: "Es ist Freitag 20:00 Uhr. Was geht bei dir ab?",
+        options: [
+          {
+            text: "Noch 2 Side-Hustles abfrühstücken, dann Late-Night Gym bis die Muskeln brennen.",
+            scores: { hustle: 3, idgaf: 0, cozy: 0, aura: 2, brainrot: 0 }
+          },
+          {
+            text: "Oversized Kuschelhoodie, Netflix zum 6. Mal rewatchen und Snack-Platte inhalieren.",
+            scores: { hustle: 0, idgaf: 1, cozy: 3, aura: 0, brainrot: 1 }
+          },
+          {
+            text: "Kein Plan, komplett spontan mit den Atzen am Kiosk versacken und gucken was geht.",
+            scores: { hustle: 1, idgaf: 3, cozy: 0, aura: 2, brainrot: 2 }
+          }
+        ]
+      },
+      {
+        id: 6,
+        tag: "Romance & Rizz 💘 (Liebe auf den ersten Schluck)",
+        title: "Du hast einen Crush. Wie läuft dein Rizz-Game?",
+        options: [
+          {
+            text: "Direkt ansprechen, Alpha Eye-Contact, straight auf ein Kaffee-Date inviten. No fear.",
+            scores: { hustle: 3, idgaf: 1, cozy: 0, aura: 3, brainrot: 0 }
+          },
+          {
+            text: "Wochenlang Spotify-Playlists stalken und komplett delulu Hochzeitspläne schmieden.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 1, brainrot: 3 }
+          },
+          {
+            text: "Gar nix. Wenn die Person nicht wortwörtlich über meine Sneaker stolpert, bleib ich Single.",
+            scores: { hustle: 0, idgaf: 3, cozy: 1, aura: 0, brainrot: 1 }
+          }
+        ]
+      },
+      {
+        id: 7,
+        tag: "Screen-Time 📱 (Hirnschmalz & Bohnenpower)",
+        title: "Wie schaut deine wöchentliche Screen-Time aus?",
+        options: [
+          {
+            text: "Unter 2 Stunden. Ich konsumiere keinen Quatsch, ich produziere echten Mehrwert.",
+            scores: { hustle: 3, idgaf: 1, cozy: 0, aura: 2, brainrot: 0 }
+          },
+          {
+            text: "7 Stunden täglich – Hauptsächlich wholesome Tierbabys, DIY und Wohlfühl-Content.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 1, brainrot: 2 }
+          },
+          {
+            text: "Mein Handy-Akku glüht, 11 Stunden TikTok Brainrot, mein Feed ist absolut geröstet.",
+            scores: { hustle: 0, idgaf: 3, cozy: 1, aura: 0, brainrot: 3 }
+          }
+        ]
+      },
+      {
+        id: 8,
+        tag: "Feedback & Kritik 🥊 (Bittere Pille)",
+        title: "Jemand kritisiert deine Arbeit oder dein Projekt. Was machst du?",
+        options: [
+          {
+            text: "Kritik ist Treibstoff! Ich ackere die Nacht durch und beweise allen, wer der Chef-Barista ist.",
+            scores: { hustle: 3, idgaf: 0, cozy: 0, aura: 2, brainrot: 0 }
+          },
+          {
+            text: "Lächeln, nicken, kurz zurückziehen und 3 Tränen der Überforderung wegdrücken.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 0, brainrot: 1 }
+          },
+          {
+            text: "Links rein, rechts raus. Ist mir so dermaßen latte, was fremde Leute über mein Life denken.",
+            scores: { hustle: 0, idgaf: 3, cozy: 0, aura: 2, brainrot: 1 }
+          }
+        ]
+      },
+      {
+        id: 9,
+        tag: "Sonntags-Aktivität 🌲 (Raus aus den Federn)",
+        title: "Bester Freund fragt: 'Kommst du spontan mit auf 20km Wanderung?'",
+        options: [
+          {
+            text: "'Nur im Running-Club, bei dem ich meine Gewichtsweste mitnehmen darf!'",
+            scores: { hustle: 3, idgaf: 0, cozy: 0, aura: 2, brainrot: 0 }
+          },
+          {
+            text: "'Bro bist du lost? Sonntag ist mein heiliger Entschleunigungstag im Bett.'",
+            scores: { hustle: 0, idgaf: 1, cozy: 3, aura: 1, brainrot: 1 }
+          },
+          {
+            text: "'Wenn am Ende Kaffee und Kuchen auf mich warten, schlepp ich meinen Körper mit.'",
+            scores: { hustle: 1, idgaf: 3, cozy: 0, aura: 0, brainrot: 1 }
+          }
+        ]
+      },
+      {
+        id: 10,
+        tag: "Trend-Check 💅 (Hype in der Tasse)",
+        title: "Ein neues absurdes Trend-Getränk für 8,50€ geht auf Social Media viral:",
+        options: [
+          {
+            text: "Völlig unnötig. Schwarzer Filterkaffee reicht völlig aus zum Funktionieren.",
+            scores: { hustle: 2, idgaf: 3, cozy: 0, aura: 1, brainrot: 0 }
+          },
+          {
+            text: "Ich MUSS es testen! Hauptsache cute für die Story und schmeckt süß nach Vanille.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 3, brainrot: 3 }
+          },
+          {
+            text: "Hatte ich schon vor 6 Monaten im Cup, bevor der Mainstream davon wusste.",
+            scores: { hustle: 1, idgaf: 1, cozy: 1, aura: 3, brainrot: 1 }
+          }
+        ]
+      },
+      {
+        id: 11,
+        tag: "Outfit-Vibe 🧢 (Drip & Roast)",
+        title: "Dein typischer täglicher Kleiderstil in einem Satz?",
+        options: [
+          {
+            text: "All-Black, minimalistisch, sportlich. Sieht aus wie Tech-Founder oder dunkle Röstung.",
+            scores: { hustle: 3, idgaf: 1, cozy: 0, aura: 3, brainrot: 0 }
+          },
+          {
+            text: "Pastellfarben, flauschiger oversized Pullover, bequeme Uggs oder Soft-Sneaker.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 2, brainrot: 1 }
+          },
+          {
+            text: "Das erste T-Shirt, das oben auf dem Stuhl lag. Hauptsache fleckenfrei.",
+            scores: { hustle: 0, idgaf: 3, cozy: 1, aura: 0, brainrot: 2 }
+          }
+        ]
+      },
+      {
+        id: 12,
+        tag: "WG-Drama 🎭 (Der Kaffeesatz des Lebens)",
+        title: "Es gibt Streit in der WG oder Gruppe wegen dem schmutzigen Geschirr:",
+        options: [
+          {
+            text: "Ich setze ein Notion-Board auf und teile jedem feste Shifts und Reinigungs-KPIs zu.",
+            scores: { hustle: 3, idgaf: 0, cozy: 0, aura: 2, brainrot: 1 }
+          },
+          {
+            text: "Ich spüle einfach alles leise selbst ab, während ich innerlich passiv-aggressiv seufze.",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 0, brainrot: 1 }
+          },
+          {
+            text: "'Leute chillt mal, das Universum dehnt sich aus, die Tasse ist temporär.'",
+            scores: { hustle: 0, idgaf: 3, cozy: 1, aura: 1, brainrot: 2 }
+          }
+        ]
+      },
+      {
+        id: 13,
+        tag: "Das große Finale 🔮 (Dein innerer Röstgrad)",
+        title: "Dein ultimatives Lebensmotto für das aktuelle Jahr?",
+        options: [
+          {
+            text: "'Schlafen kann ich später – wir mahlen uns das verdammte Imperium zusammen!'",
+            scores: { hustle: 3, idgaf: 0, cozy: 0, aura: 3, brainrot: 0 }
+          },
+          {
+            text: "'Soft Life Era: Viel Schlaf, Hafermilch-Wolken, gesunde Grenzen und bloß keine bösen Vibes.'",
+            scores: { hustle: 0, idgaf: 0, cozy: 3, aura: 2, brainrot: 1 }
+          },
+          {
+            text: "'Ist mir doch latte – we ball anyway, egal was gerade anbrennt!'",
+            scores: { hustle: 1, idgaf: 3, cozy: 1, aura: 2, brainrot: 2 }
+          }
+        ]
+      }
+    ];
+
+    const archetypes = {
+      espresso_doppio: {
+        title: "Espresso Doppio ☕⚡",
+        emoji: "💀",
+        tagline: "Hustle-Zombie mit Puls 220 & Deadlines im Mahlwerk",
+        desc: "Du bist der Inbegriff von Macher-Mentalität: Espresso yourself! Für Schnickschnack wie extra Zucker oder Hafermilch hast du keine Sekunde Zeit. Du kippst das schwarze Gold wie Maschinenöl hinunter, weil die To-Do-Liste brennt und du die Weltherrschaft vor dem Mittagessen abfrühstückst. Pass auf dein Herz auf, Chef-Barista!",
+        radarScale: { hustle: 95, idgaf: 45, cozy: 15, aura: 85, brainrot: 30 }
+      },
+      iced_americano: {
+        title: "Iced Americano 🧊🕶️",
+        emoji: "🧊",
+        tagline: "'Ist mir doch latte' – 3 Eiswürfel, schmerzfrei & unantastbar",
+        desc: "Du bist absolut immun gegen heiße Luft und unnötiges Drama. Draußen schneit es? Latte-egal, du schlürfst deinen Americano trotzdem eiskalt mit Strohhalm. Dein Leben ist pragmatisch, stoisch und maximal unbeeindruckt vom Chaos um dich herum. Ein Schluck und du weißt: Die Welt kocht über, aber du bleibst eiskalt serviert.",
+        radarScale: { hustle: 50, idgaf: 95, cozy: 35, aura: 80, brainrot: 40 }
+      },
+      oat_vanilla_latte: {
+        title: "Oat Milk Vanilla Latte 🧸🌸",
+        emoji: "🧁",
+        tagline: "Pillow Princess & flauschiger Emotional Support Drink",
+        desc: "Du brauchst keinen Koffein-Schock, du brauchst eine wärmende Umarmung in Tassenform! Hafermilch (bitte Barista Edition), zwei Pumps Vanille und bloß keine Bitterstoffe. Du bist feinfühlig, liebst Gemütlichkeit und dein Mental-Health-Tag geht die ganze Woche. Ein bohnastischer Sonnenschein mit samtiger Schaumkrone!",
+        radarScale: { hustle: 20, idgaf: 30, cozy: 95, aura: 75, brainrot: 70 }
+      },
+      cold_brew_nitro: {
+        title: "Cold Brew Nitro 🧪🚀",
+        emoji: "⚡",
+        tagline: "Third-Wave Visionär mit unendlicher Rizz-Aura",
+        desc: "Normaler Filterkaffee ist dir viel zu gewöhnlich. Du brauchst 18 Stunden kalt extrahierten Stickstoff-Brew mit samtiger Crema. Du bist trendbewusst, ultra stylish und balancierst gekonnt zwischen genialem Masterplan und unhinged Brainrot. Crema de la Crema – pure Main-Character Energy!",
+        radarScale: { hustle: 80, idgaf: 70, cozy: 40, aura: 95, brainrot: 85 }
+      },
+      filter_thermos: {
+        title: "Filterkaffee aus der Thermoskanne 🫖🗿",
+        emoji: "📻",
+        tagline: "Der unzerstörbare Gigachad – Bohnenstark & bodenständig",
+        desc: "Du machst dir nix aus Schischi, Sirup oder fancy Haferdrinks. Eine verbeulte Thermoskanne, klassischer Röstkaffee und du funktionierst zuverlässig wie ein Schweizer Uhrwerk. Filterlos ehrlich, null Allüren und mit jeder Lebenslage tiefenentspannt im Reinen.",
+        radarScale: { hustle: 60, idgaf: 85, cozy: 50, aura: 65, brainrot: 15 }
+      }
+    };
+
+    let currentQuestionIndex = 0;
+    let scores = {
+      hustle: 0,
+      idgaf: 0,
+      cozy: 0,
+      aura: 0,
+      brainrot: 0
+    };
+    let calculatedMatchKey = "iced_americano";
+
+    const screenIntro = document.getElementById('screen-intro');
+    const screenQuiz = document.getElementById('screen-quiz');
+    const screenResult = document.getElementById('screen-result');
+
+    const btnStart = document.getElementById('btn-start');
+    const btnRestart = document.getElementById('btn-restart');
+    const btnShare = document.getElementById('btn-share');
+    const btnShareText = document.getElementById('btn-share-text');
+    const btnDownloadChart = document.getElementById('btn-download-chart');
+
+    const progressText = document.getElementById('quiz-progress-text');
+    const progressPercent = document.getElementById('quiz-progress-percent');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const questionTag = document.getElementById('question-tag');
+    const questionTitle = document.getElementById('question-title');
+    const optionsContainer = document.getElementById('options-container');
+
+    const resultEmoji = document.getElementById('result-emoji');
+    const resultTitle = document.getElementById('result-title');
+    const resultTagline = document.getElementById('result-tagline');
+    const resultDescription = document.getElementById('result-description');
+    const radarCanvas = document.getElementById('radarCanvas');
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+    const toastIcon = document.getElementById('toast-icon');
+
+    function showToast(message, icon = '✨') {
+      toastText.innerText = message;
+      toastIcon.innerText = icon;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }, 3000);
+    }
+
+    btnStart.addEventListener('click', () => {
+      screenIntro.classList.add('hidden');
+      screenQuiz.classList.remove('hidden');
+      currentQuestionIndex = 0;
+      scores = { hustle: 0, idgaf: 0, cozy: 0, aura: 0, brainrot: 0 };
+      renderQuestion();
+    });
+
+    function renderQuestion() {
+      const q = questions[currentQuestionIndex];
+      const total = questions.length;
+      const pct = Math.round(((currentQuestionIndex + 1) / total) * 100);
+
+      progressText.innerText = `Röstvorgang: ${currentQuestionIndex + 1} von ${total}`;
+      progressPercent.innerText = `${pct}%`;
+      progressBar.style.width = `${pct}%`;
+
+      questionTag.innerText = q.tag;
+      questionTitle.innerText = q.title;
+
+      optionsContainer.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-4 rounded-2xl bg-brand-800/40 hover:bg-brand-700/60 border border-brand-700/50 hover:border-brand-400/80 transition-all duration-200 transform active:scale-[0.99] flex items-center gap-3.5 group";
+        
+        const letters = ['A', 'B', 'C'];
+        btn.innerHTML = `
+          <div class="w-8 h-8 shrink-0 rounded-xl bg-brand-900 border border-brand-600/50 flex items-center justify-center font-bold text-xs text-brand-300 group-hover:border-brand-300 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+            ${letters[idx]}
+          </div>
+          <div class="flex-1 text-sm sm:text-base font-semibold text-slate-100 group-hover:text-white leading-snug">
+            ${opt.text}
+          </div>
+        `;
+
+        btn.addEventListener('click', () => selectOption(opt));
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function selectOption(option) {
+      for (const key in option.scores) {
+        scores[key] += option.scores[key];
+      }
+
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function calculateArchetype() {
+      const { hustle, idgaf, cozy, aura, brainrot } = scores;
+
+      if (hustle >= 20 && aura >= 18) return "espresso_doppio";
+      if (idgaf >= 20 && hustle < 18) return "iced_americano";
+      if (cozy >= 20) return "oat_vanilla_latte";
+      if (brainrot >= 18 && aura >= 18) return "cold_brew_nitro";
+      if (idgaf >= 15 && hustle >= 15) return "filter_thermos";
+
+      if (hustle >= idgaf && hustle >= cozy) return "espresso_doppio";
+      if (cozy >= hustle && cozy >= idgaf) return "oat_vanilla_latte";
+      return "iced_americano";
+    }
+
+    function finishQuiz() {
+      calculatedMatchKey = calculateArchetype();
+      const profile = archetypes[calculatedMatchKey];
+
+      screenQuiz.classList.add('hidden');
+      screenResult.classList.remove('hidden');
+
+      resultEmoji.innerText = profile.emoji;
+      resultTitle.innerText = profile.title;
+      resultTagline.innerText = profile.tagline;
+      resultDescription.innerText = profile.desc;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      setTimeout(() => {
+        drawRadarChart();
+      }, 100);
+    }
+
+    // Draw Modern Glowing Radar Chart on Canvas with generous padding to prevent text clipping
+    function drawRadarChart() {
+      const canvas = radarCanvas;
+      const ctx = canvas.getContext('2d');
+
+      const dpr = window.devicePixelRatio || 1;
+      const size = Math.min(canvas.parentElement.clientWidth, 340);
+      
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+      canvas.style.width = `${size}px`;
+      canvas.style.height = `${size}px`;
+      
+      ctx.scale(dpr, dpr);
+
+      const center = size / 2;
+      const radius = size * 0.31;
+
+      const axes = [
+        { label: "Hustle ⚡", key: "hustle" },
+        { label: "Latte-Egal 🧊", key: "idgaf" },
+        { label: "Cozy 🧸", key: "cozy" },
+        { label: "Aura 👑", key: "aura" },
+        { label: "Brainrot 🧠", key: "brainrot" }
+      ];
+      const totalAxes = axes.length;
+      const angleStep = (Math.PI * 2) / totalAxes;
+
+      ctx.clearRect(0, 0, size, size);
+
+      // 1. Concentric Polygons
+      const levels = [0.25, 0.5, 0.75, 1.0];
+      levels.forEach((lvl) => {
+        ctx.beginPath();
+        for (let i = 0; i < totalAxes; i++) {
+          const angle = i * angleStep - Math.PI / 2;
+          const x = center + Math.cos(angle) * (radius * lvl);
+          const y = center + Math.sin(angle) * (radius * lvl);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = "rgba(168, 85, 247, 0.22)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      });
+
+      // 2. Spokes & Labels
+      for (let i = 0; i < totalAxes; i++) {
+        const angle = i * angleStep - Math.PI / 2;
+        const x = center + Math.cos(angle) * radius;
+        const y = center + Math.sin(angle) * radius;
+
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = "rgba(168, 85, 247, 0.35)";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        const labelDistance = radius + 20;
+        const lx = center + Math.cos(angle) * labelDistance;
+        const ly = center + Math.sin(angle) * labelDistance;
+
+        ctx.font = "bold 10.5px system-ui, sans-serif";
+        ctx.fillStyle = "#e2e8f0";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(axes[i].label, lx, ly);
+      }
+
+      // 3. User Scores
+      const maxRaw = 28;
+      const values = axes.map(axis => {
+        const raw = scores[axis.key] || 0;
+        return Math.min(Math.max((raw / maxRaw) * 1.15, 0.22), 1.0);
+      });
+
+      // 4. Data Polygon
+      ctx.beginPath();
+      for (let i = 0; i < totalAxes; i++) {
+        const angle = i * angleStep - Math.PI / 2;
+        const r = radius * values[i];
+        const x = center + Math.cos(angle) * r;
+        const y = center + Math.sin(angle) * r;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+
+      const gradient = ctx.createRadialGradient(center, center, 10, center, center, radius);
+      gradient.addColorStop(0, "rgba(216, 70, 239, 0.6)");
+      gradient.addColorStop(1, "rgba(139, 92, 246, 0.3)");
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      ctx.strokeStyle = "#38bdf8";
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = "#a855f7";
+      ctx.shadowBlur = 12;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // 5. Vertices
+      for (let i = 0; i < totalAxes; i++) {
+        const angle = i * angleStep - Math.PI / 2;
+        const r = radius * values[i];
+        const x = center + Math.cos(angle) * r;
+        const y = center + Math.sin(angle) * r;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        ctx.strokeStyle = "#f43f5e";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+    }
+
+    // Renders the full share card into an offscreen canvas
+    function generateShareCardCanvas() {
+      const card = document.createElement('canvas');
+      const w = 800;
+      const h = 1000;
+      card.width = w;
+      card.height = h;
+      const ctx = card.getContext('2d');
+      const profile = archetypes[calculatedMatchKey];
+
+      // 1. Background gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+      bgGrad.addColorStop(0, "#090314");
+      bgGrad.addColorStop(0.5, "#170830");
+      bgGrad.addColorStop(1, "#260a4c");
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Glowing Ambient Circles
+      ctx.save();
+      ctx.filter = "blur(70px)";
+      ctx.fillStyle = "rgba(176, 84, 247, 0.35)";
+      ctx.beginPath();
+      ctx.arc(140, 160, 160, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "rgba(244, 63, 94, 0.25)";
+      ctx.beginPath();
+      ctx.arc(w - 120, h - 220, 180, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Card Border / Frame
+      ctx.strokeStyle = "rgba(168, 85, 247, 0.3)";
+      ctx.lineWidth = 4;
+      ctx.strokeRect(20, 20, w - 40, h - 40);
+
+      // Header Tag
+      ctx.font = "bold 16px system-ui, sans-serif";
+      ctx.fillStyle = "#d88bff";
+      ctx.textAlign = "center";
+      ctx.fillText("☕ COFFEETEST.BENEDRIVE.DE • VIBE CHECK", w / 2, 70);
+
+      // Emoji
+      ctx.font = "75px system-ui, sans-serif";
+      ctx.fillText(profile.emoji, w / 2, 165);
+
+      // Title
+      ctx.font = "bold 38px system-ui, sans-serif";
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText(profile.title, w / 2, 230);
+
+      // Tagline
+      ctx.font = "italic 20px system-ui, sans-serif";
+      ctx.fillStyle = "#f472b6";
+      ctx.fillText(`"${profile.tagline}"`, w / 2, 272);
+
+      // Divider line
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(80, 305);
+      ctx.lineTo(w - 80, 305);
+      ctx.stroke();
+
+      // 2. Render Radar Chart in Center
+      const center = { x: w / 2, y: 555 };
+      const radius = 170;
+      const axes = [
+        { label: "Hustle ⚡", key: "hustle" },
+        { label: "Latte-Egal 🧊", key: "idgaf" },
+        { label: "Cozy 🧸", key: "cozy" },
+        { label: "Aura 👑", key: "aura" },
+        { label: "Brainrot 🧠", key: "brainrot" }
+      ];
+      const totalAxes = axes.length;
+      const angleStep = (Math.PI * 2) / totalAxes;
+
+      // Web levels
+      const levels = [0.25, 0.5, 0.75, 1.0];
+      levels.forEach(lvl => {
+        ctx.beginPath();
+        for (let i = 0; i < totalAxes; i++) {
+          const angle = i * angleStep - Math.PI / 2;
+          const x = center.x + Math.cos(angle) * (radius * lvl);
+          const y = center.y + Math.sin(angle) * (radius * lvl);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = "rgba(168, 85, 247, 0.3)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      });
+
+      // Spoke Lines & Labels
+      for (let i = 0; i < totalAxes; i++) {
+        const angle = i * angleStep - Math.PI / 2;
+        const x = center.x + Math.cos(angle) * radius;
+        const y = center.y + Math.sin(angle) * radius;
+
+        ctx.beginPath();
+        ctx.moveTo(center.x, center.y);
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = "rgba(168, 85, 247, 0.4)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        const labelDistance = radius + 32;
+        const lx = center.x + Math.cos(angle) * labelDistance;
+        const ly = center.y + Math.sin(angle) * labelDistance;
+
+        ctx.font = "bold 17px system-ui, sans-serif";
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(axes[i].label, lx, ly);
+      }
+
+      // Scores polygon
+      const maxRaw = 28;
+      const values = axes.map(axis => {
+        const raw = scores[axis.key] || 0;
+        return Math.min(Math.max((raw / maxRaw) * 1.15, 0.22), 1.0);
+      });
+
+      ctx.beginPath();
+      for (let i = 0; i < totalAxes; i++) {
+        const angle = i * angleStep - Math.PI / 2;
+        const r = radius * values[i];
+        const x = center.x + Math.cos(angle) * r;
+        const y = center.y + Math.sin(angle) * r;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+
+      const polyGrad = ctx.createRadialGradient(center.x, center.y, 20, center.x, center.y, radius);
+      polyGrad.addColorStop(0, "rgba(216, 70, 239, 0.7)");
+      polyGrad.addColorStop(1, "rgba(139, 92, 246, 0.35)");
+      ctx.fillStyle = polyGrad;
+      ctx.fill();
+
+      ctx.strokeStyle = "#38bdf8";
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      for (let i = 0; i < totalAxes; i++) {
+        const angle = i * angleStep - Math.PI / 2;
+        const r = radius * values[i];
+        const x = center.x + Math.cos(angle) * r;
+        const y = center.y + Math.sin(angle) * r;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 7, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        ctx.strokeStyle = "#f43f5e";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+
+      // 3. Footer Banner & Link
+      ctx.fillStyle = "rgba(18, 7, 38, 0.75)";
+      ctx.beginPath();
+      ctx.roundRect(70, 840, w - 140, 95, 20);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(168, 85, 247, 0.4)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.font = "bold 20px system-ui, sans-serif";
+      ctx.fillStyle = "#ffffff";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("Welcher Kaffeetyp bist du? Jetzt testen:", w / 2, 872);
+
+      ctx.font = "bold 24px system-ui, sans-serif";
+      ctx.fillStyle = "#38bdf8";
+      ctx.fillText("coffeetest.benedrive.de", w / 2, 907);
+
+      return card;
+    }
+
+    // Share Button: Renders image card & invokes navigator.share or fallback
+    btnShare.addEventListener('click', async () => {
+      btnShareText.innerText = "Wird gerendert...";
+
+      try {
+        const cardCanvas = generateShareCardCanvas();
+        const shareText = "Ich hab den Test gemacht, hier starten: https://coffeetest.benedrive.de ☕️🤟🏼";
+
+        cardCanvas.toBlob(async (blob) => {
+          btnShareText.innerText = "Teilen";
+
+          if (!blob) {
+            fallbackShareText(shareText);
+            return;
+          }
+
+          const file = new File([blob], 'mein-kaffeetest.png', { type: 'image/png' });
+
+          // Try native Web Share API with image file
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+              await navigator.share({
+                files: [file],
+                title: "Kaffee Persönlichkeitstest",
+                text: shareText
+              });
+              showToast("Erfolgreich geteilt! 🚀", "✨");
+              return;
+            } catch (err) {
+              if (err.name === 'AbortError') return; // User closed modal
+            }
+          }
+
+          // Fallback if browser/platform doesn't support file sharing
+          triggerDownload(blob, 'mein-kaffeetest.png');
+          fallbackCopyText(shareText, "Ergebnis-Bild gespeichert & Text kopiert! 🚀");
+        }, 'image/png');
+
+      } catch (err) {
+        btnShareText.innerText = "Teilen";
+        fallbackShareText("Ich hab den Test gemacht, hier starten: https://coffeetest.benedrive.de ☕️🤟🏼");
+      }
+    });
+
+    function triggerDownload(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function fallbackShareText(text) {
+      fallbackCopyText(text, "Teil-Text in Zwischenablage kopiert! 🚀");
+    }
+
+    function fallbackCopyText(text, successMsg) {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = text;
+      tempInput.style.position = 'fixed';
+      tempInput.style.left = '-9999px';
+      document.body.appendChild(tempInput);
+      tempInput.focus();
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg, "📋");
+      } catch (err) {
+        showToast("Link: " + text, "📋");
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    // Download Chart only
+    btnDownloadChart.addEventListener('click', () => {
+      try {
+        const dataUrl = radarCanvas.toDataURL("image/png");
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = `Coffeetest-Netzdiagramm-${calculatedMatchKey}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast("Diagramm erfolgreich gespeichert!", "📥");
+      } catch (err) {
+        showToast("Download fehlgeschlagen", "❌");
+      }
+    });
+
+    // Restart Quiz
+    btnRestart.addEventListener('click', () => {
+      screenResult.classList.add('hidden');
+      screenIntro.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Handle incoming direct link visits
+    window.addEventListener('load', () => {
+      const params = new URLSearchParams(window.location.search);
+      const sharedVibe = params.get('vibe');
+      if (sharedVibe && archetypes[sharedVibe]) {
+        calculatedMatchKey = sharedVibe;
+        scores.hustle = parseInt(params.get('h')) || 20;
+        scores.idgaf = parseInt(params.get('i')) || 15;
+        scores.cozy = parseInt(params.get('c')) || 15;
+        scores.aura = 20;
+        scores.brainrot = 18;
+
+        screenIntro.classList.add('hidden');
+        screenResult.classList.remove('hidden');
+
+        const profile = archetypes[calculatedMatchKey];
+        resultEmoji.innerText = profile.emoji;
+        resultTitle.innerText = profile.title;
+        resultTagline.innerText = profile.tagline;
+        resultDescription.innerText = profile.desc;
+
+        setTimeout(() => drawRadarChart(), 150);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (!screenResult.classList.contains('hidden')) {
+        drawRadarChart();
+      }
+    });
+  </script>
+</body>
+</html>
